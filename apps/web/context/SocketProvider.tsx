@@ -30,7 +30,7 @@ export const useSocket = () => {
 
 export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
 
-    const BASE_URL = `http://localhost:8080`;
+    const BASE_URL = `https://uk-piggs.vercel.app/`;
 
 
     const [socket, setSocket] = useState<Socket>()
