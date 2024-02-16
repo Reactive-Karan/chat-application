@@ -1,7 +1,7 @@
 "use client"
 import React, { useCallback, useContext, useEffect, useState } from "react"
 import { io, Socket } from "socket.io-client"
-import { BASE_URL } from "../app/constants/BASE_URL"
+
 
 
 interface SocketProviderProps {
@@ -14,7 +14,7 @@ interface IMessage {
 }
 
 interface ISocketContext {
-    sendMessage: (msg: string) => any
+    sendMessage: (msg: string, name: string) => any
     messages: IMessage[]
 }
 
@@ -29,12 +29,16 @@ export const useSocket = () => {
 }
 
 export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
+
+    const BASE_URL = `http://localhost:8080`;
+
+
     const [socket, setSocket] = useState<Socket>()
     const [messages, setMessages] = useState<IMessage[]>([])
 
-    const sendMessage: ISocketContext['sendMessage'] = useCallback((msg: string) => {
+    const sendMessage: ISocketContext['sendMessage'] = useCallback((msg: string, name: string) => {
         if (socket) {
-            socket.emit("event:message", { message: msg })
+            socket.emit("event:message", { message: msg, name })
             // publish this message to redis
         }
         console.log("Send Message", msg)

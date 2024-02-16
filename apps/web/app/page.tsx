@@ -5,6 +5,9 @@ import { useSocket } from '../context/SocketProvider';
 import ChatBubble from './components/chat-bubble/Chat-Bubble';
 import classes from './page.module.css';
 
+
+
+
 interface Message {
   text: string;
   sender: string;
@@ -12,12 +15,13 @@ interface Message {
 
 const Page: React.FC = () => {
   const { sendMessage, messages } = useSocket();
+  const [currentUser, setCurrentUser] = useState("User")
   const [message, setMessage] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const handleSend = () => {
     if (message.trim() !== '') {
-      sendMessage(message);
+      sendMessage(message, currentUser);
       setMessage('');
     }
   };

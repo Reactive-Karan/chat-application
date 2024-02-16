@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { SocketProvider } from "../context/SocketProvider"
 import 'tailwindcss/tailwind.css';
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
