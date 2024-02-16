@@ -1,6 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SocketProvider } from "../context/SocketProvider"
+import 'tailwindcss/tailwind.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,10 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <SocketProvider>
+
+        <body className={inter.className}>{children}</body>
+      </SocketProvider>
     </html>
   );
 }
